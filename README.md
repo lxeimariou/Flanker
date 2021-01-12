@@ -13,16 +13,48 @@ de Leeuw, J. R., JsPsych: A JavaScript library for creating behavioral
 experiments in a Web browser, Behavior research methods, (), 1–12 (2014).
 
 
-To regenerate the code for [PsychoPy](https://www.psychopy.org/) from the
-pyFlies model run:
+# Installing and running
 
-    textx generate eriksen.pf --target psychopy --overwrite
+To run this experiment in [PsychoPy
+generator](https://github.com/pyflies/pyflies-psychopy):
 
-To generate the code you must have pyFlies and [PsychoPy
-generator](https://github.com/pyflies/pyflies-psychopy) installed.
+1. Clone the git repo:
+   ```
+   git clone git@github.com:pyflies/EriksenFlanker.git 
+   # or without github account
+   git clone https://github.com/pyflies/EriksenFlanker.git
+   ```
 
-To run the experiment:
+2. Go into the folder and crate Python virtual environment:
+   ```
+   cd EriksenFlanker
+   python -m venv venv
+   ```    
+    
+3. Activate Python virtual environment:
+   ```
+   source venv/bin/activate
+   ```
+   
+4. Install PsychoPy generator for pyFlies:
+   ```
+   pip install pyflies-psychopy
+   ```
 
-    python eriksen.py
+5. Generate Python code:
+   ```
+   textx generate eriksen.pf --target psychopy --overwrite
+   ```
+   
+6. Run it under PsychoPy:
+   - [Install PsychoPy](https://www.psychopy.org/download.html)
+   - Run
+     ```
+     python eriksen.py
+     ```
 
-To run the experiment you must have PsychoPy installed.
+## Notes
+
+- If you change the pyFlies model `eriksen.pf` you can regenerate the code with
+  step 5 and then rerun with `python eriksen.py`.
+- You have to source the Python environment (step 3) for each new terminal session.
