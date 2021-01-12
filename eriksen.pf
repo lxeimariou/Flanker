@@ -1,0 +1,50 @@
+directions = [left, right]
+congruencies = [incongruent, congruent]
+repeats = 1
+
+test EriksenFlanker {
+
+    | repeat          | direction       | category          |
+    | --------------- | --------------- | ----------------- |
+    | 1..repeats loop | directions loop | congruencies loop |
+
+    fix -> cross() for 1000..3000 choose
+    exec -> image(file "images/{{direction}}-{{category}}.png", size 100)
+            keyboard(valid directions, correct direction)
+    error -> sound(freq 800) for 300
+    correct -> sound(freq 400) for 300
+}
+
+screen intro {
+    Welcome
+    -------
+
+    In the following test you will be presented with a line of 5 arrow pointing
+    left or right. You should respond by the direction of the *middle arrow* as
+    fast as possible by pressing left or right arrow on the keyboard or
+    touching/clicking on appropriate button on the screen.
+
+    You will first do a practice run with 4 trials. A real run with 20 trial
+    will be performed afterwards.
+
+    Press SPACE or touch/click the screen to continue
+}
+
+screen real {
+    Real block
+    ----------
+
+    Now a real block of trials will be performed.
+
+    Press SPACE or touch/click the screen to continue
+}
+
+flow {
+    show intro
+    // Perform practice test serie
+    execute EriksenFlanker(practice true, random true)
+
+    show real
+    // Perform real test serie (collects data)
+    execute EriksenFlanker(repeats 5, random true)
+}
